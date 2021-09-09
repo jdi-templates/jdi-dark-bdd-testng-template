@@ -31,7 +31,7 @@ jobs:
 
       - name: Build with Maven
         id: build
-        run: mvn install -DskipTests - ntp
+        run: mvn install -DskipTests -ntp
 
       - name: Tests
         id: ftests
