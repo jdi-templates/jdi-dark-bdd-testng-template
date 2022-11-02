@@ -54,38 +54,6 @@ jobs:
         if: github.event_name == 'pull_request' && success()
         run: mvn test -ntp ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
-      - name: Get Allure history
-        uses: actions/checkout@v3
-        id: allure-setup
-        continue-on-error: true
-        if: github.event_name == 'pull_request' && failure()
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure report
-        uses: simple-elf/allure-report-action@master
-        if: github.event_name == 'pull_request' && always()
-        with:
-          allure_results: target/allure-results
-          allure_report: target/allure-report
-          allure_history: allure-history
-
-      - name: Upload Allure report
-        uses: actions/upload-artifact@master
-        if: github.event_name == 'pull_request' && failure()
-        with:
-          name: Allure report
-          path: target/allure-report
-
-      - name: Deploy Allure report to Github Pages
-        if: github.event_name == 'pull_request' && always()
-        uses: peaceiris/actions-gh-pages@v3
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-
       - name: Check tests are passed
         if: ${{ steps.ftests.outcome != 'success' }}
         run: |
