@@ -55,7 +55,6 @@ jobs:
       - name: Tests
         id: ftests
         timeout-minutes: 10
-        if: github.event_name == 'pull_request' && success()
         run: mvn test -ntp ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
       - name: Check tests are passed
