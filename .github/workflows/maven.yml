@@ -11,11 +11,15 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  repository_dispatch:
+    types:
+      - webhook
+
 
 jobs:
   build:
     name: Tests on JDK
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       max-parallel: 1
       fail-fast: false
