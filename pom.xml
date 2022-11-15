@@ -18,7 +18,7 @@
         <allure.cucumber.jvm.version>2.13.1</allure.cucumber.jvm.version>
         <allure.common.version>2.13.1</allure.common.version>
         <surefire.version>2.22.1</surefire.version>
-        <jdi-dark.version>1.1.1</jdi-dark.version>
+        <jdi-dark.version>LATEST</jdi-dark.version>
         <profile.val>test</profile.val>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
