@@ -16,9 +16,10 @@
         <aspectj.version>1.9.7</aspectj.version>
         <allure.maven.version>2.10.0</allure.maven.version>
         <allure.cucumber.jvm.version>2.13.1</allure.cucumber.jvm.version>
-        <allure.common.version>2.13.1</allure.common.version>
+        <allure.common.version>2.20.1</allure.common.version>
         <surefire.version>2.22.1</surefire.version>
-        <jdi-dark.version>LATEST</jdi-dark.version>
+        <cucumber.version>7.10.1</cucumber.version>
+        <jdi-dark.version>RELEASE</jdi-dark.version>
         <profile.val>test</profile.val>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
@@ -36,16 +37,24 @@
             <artifactId>allure-java-commons</artifactId>
             <version>${allure.common.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber4-jvm</artifactId>
-            <version>${allure.cucumber.jvm.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>4.8.1</version>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>${allure.common.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -69,11 +78,11 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <failIfNoTests>true</failIfNoTests>
+                    <!-- testFailureIgnore>true</testFailureIgnore -->
                     <argLine>
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
                     </argLine>
                 </configuration>
                 <dependencies>
